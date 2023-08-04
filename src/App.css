@@ -1,2 +1,45 @@
-.main {
+body {
+  background-color: rgb(215, 221, 224);
+}
+
+.main-heading {
+  color: rgb(93, 93, 93);
+}
+
+.button {
+  width: 156px;
+  height: 36px;
+  margin: 6px 8px;
+  padding: 0px 30px;
+  color: black;
+  background: rgb(105, 152, 136);
+  border-radius: 10px;
+  font-size: 20px;
+  color: black;
+  outline: none;
+  border: none;
+}
+
+.button2 {
+  width: 156px;
+  height: 36px;
+  margin: 6px 8px;
+  padding: 0px 30px;
+  color: black;
+  background: rgb(255, 168, 127);
+  border-radius: 10px;
+  font-size: 20px;
+  color: black;
+  outline: none;
+  border: none;
+}
+
+.input-tag {
+  width: 156px;
+  height: 36px;
+  margin: 6px 8px;
+  padding: 0px 30px;
+  color: black;
+  background: rgb(186, 161, 150);
+  color: black;
 }

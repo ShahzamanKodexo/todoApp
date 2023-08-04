@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 function Auth({ children }) {
   const user = JSON.parse(localStorage.getItem("userData"));
 
-  // console.log("---", user);
-
   const navigate = useNavigate();
 
   useEffect(() => {

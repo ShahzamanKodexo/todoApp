@@ -1,38 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
-import TodoComp, { getTodoItems } from "./todoComp";
+import TodoComp from "./todoComp";
+import { addTask, getTodoItems, deleteMany } from "./api-services/todo";
 
 function Todo() {
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
   const [data, setData] = useState([]);
-
-  function addTask() {
-    console.log("Title ------>", title);
-    const myData = JSON.parse(localStorage.getItem("userData"));
-    console.log(myData, myData?._id);
-    axios
-      .post("http://localhost:3001/api/task/create", {
-        title,
-        userId: myData._id,
-      })
-      .then((response) => {
-        // console.log("RES ------>", response);
-        getTodoItems()
-          .then((res) => {
-            console.log("data", res);
-            setData(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        setTitle("");
-      })
-      .catch((err) => {
-        return err;
-      });
-  }
 
   useEffect(() => {
     if (!title) {
@@ -51,19 +24,31 @@ function Todo() {
     <>
       <div className="main">
         <center>
-          <h1>TODO APP</h1>
+          <h1 className="main-heading">TODO APP</h1>
           <input
+            className="button"
             onChange={(e) => setTitle(e.target.value)}
             type="text"
+            value={title}
             placeholder="add task"
           />
-          <button onClick={addTask} type="text">
+          <button
+            className="button"
+            onClick={() => addTask({ title, setData, setTitle })}
+            type="text"
+          >
             add
           </button>
-          <button type="text">delete all</button>
+          <button
+            className="button"
+            onClick={() => deleteMany({ setData })}
+            type="text"
+          >
+            delete all
+          </button>
           <br />
 
-          <TodoComp data={data} />
+          <TodoComp setData={setData} data={data} />
         </center>
       </div>
     </>

@@ -1,30 +1,17 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { userData } from "./api-services/auth";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  function userData() {
-    axios
-      .post("http://localhost:3001/api/user/addUser", {
-        name,
-        email,
-        password,
-      })
-      .then((res) => {
-        navigate("/signin");
-      })
-      .catch((err) => {
-        return err;
-      });
-  }
 
   return (
     <div className="container">
       <input
+        className="button"
         onChange={(e) => {
           setName(e.target.value);
         }}
@@ -32,6 +19,7 @@ const SignUp = () => {
         placeholder="name"
       />
       <input
+        className="button"
         onChange={(e) => {
           setEmail(e.target.value);
         }}
@@ -39,11 +27,16 @@ const SignUp = () => {
         placeholder="email"
       />
       <input
+        className="button"
         onChange={(e) => setPassword(e.target.value)}
         type="password"
         placeholder="password"
       />
-      <button onClick={userData} type="submit">
+      <button
+        className="button"
+        onClick={() => userData({ name, email, password, navigate })}
+        type="submit"
+      >
         Submit
       </button>
     </div>

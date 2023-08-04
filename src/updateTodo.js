@@ -1,33 +1,17 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { editTodoItems, deleteTodoItems } from "./api-services/todo";
 
-function editTodoItems(id, todoText, setEnable) {
-  axios
-    .put(`http://localhost:3001/api/task/${id}`, {
-      title: todoText,
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((err) => {
-      return err;
-    })
-    .finally(() => {
-      setEnable();
-    });
-}
-
-const UpdateTodo = ({ data }) => {
+const UpdateTodo = ({ data, setData }) => {
   const [enable, setEnable] = useState(false);
   const [todoText, setTodoText] = useState("");
 
   useEffect(() => {
     setTodoText(data?.title);
   }, [data]);
-
   return (
     <center>
       <input
+        className="button2"
         onChange={(e) => {
           setTodoText(e.target.value);
         }}
@@ -38,6 +22,7 @@ const UpdateTodo = ({ data }) => {
       />
       {enable ? (
         <button
+          className="button2"
           onClick={() =>
             editTodoItems(data?._id, todoText, () => setEnable(false))
           }
@@ -46,12 +31,18 @@ const UpdateTodo = ({ data }) => {
           done
         </button>
       ) : (
-        <button onClick={() => setEnable(true)} type="text">
+        <button className="button2" onClick={() => setEnable(true)} type="text">
           edit
         </button>
       )}
 
-      <button type="text">delete</button>
+      <button
+        className="button2"
+        onClick={() => deleteTodoItems({ id: data?._id, setData })}
+        type="text"
+      >
+        delete
+      </button>
       <br />
     </center>
   );

@@ -7,14 +7,12 @@ const Routers = () => {
       <Router>
         <Routes>
           {ROUTES.map(
-            ({
-              auth: AppRoute,
-              component: Component,
-              path,
-              exact,
-              ...others
-            }) => (
+            (
+              { auth: AppRoute, component: Component, path, exact, ...others },
+              i
+            ) => (
               <Route
+                key={i}
                 exact={exact}
                 path={path}
                 element={
